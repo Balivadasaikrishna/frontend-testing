@@ -57,12 +57,19 @@ jobs:
       run: npm ci
       
     - name: Install Playwright browsers
-      uses: microsoft/playwright@v1
-      with:
-        browsers: chromium
+      run: npx playwright install --with-deps chromium
       
     - name: Verify browser installation
-      run: npx playwright install chromium
+      run: |
+        echo "Installing browsers..."
+        npx playwright install chromium
+        echo "Browser installation complete"
+      
+    - name: Check browser availability
+      run: |
+        echo "Checking browser availability..."
+        npx playwright --version
+        echo "Browser check complete"
       
     - name: Run E2E tests
       run: npx playwright test --project=chromium --reporter=list
