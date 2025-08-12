@@ -43,7 +43,10 @@
     "declaration": false,
     
     // Flatten output structure - files go directly to dist/
-    "rootDir": "./src"
+    "rootDir": "./src",
+    
+    // Ensure files are emitted
+    "noEmit": false
   },
   "include": [
     "src/**/*"
