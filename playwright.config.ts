@@ -4,7 +4,7 @@ export default defineConfig({
   testDir: './tests/e2e',
   retries: 0,
   use: {
-    headless: false,
+    headless: true, // Changed to true for CI
     viewport: { width: 1280, height: 720 },
     ignoreHTTPSErrors: true,
     video: 'retain-on-failure',
@@ -12,8 +12,16 @@ export default defineConfig({
   },
   projects: [
     {
-      name: 'chrome',
-      use: { ...{ channel: 'chrome' } },
+      name: 'chromium',
+      use: { ...{ channel: 'chromium' } },
+    },
+    {
+      name: 'firefox',
+      use: { ...{ channel: 'firefox' } },
+    },
+    {
+      name: 'webkit',
+      use: { ...{ channel: 'webkit' } },
     },
   ],
 }); 

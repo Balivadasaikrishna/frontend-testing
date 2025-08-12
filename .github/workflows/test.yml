@@ -78,7 +78,7 @@ jobs:
         PLAYWRIGHT_BROWSERS_PATH: 0
         
     - name: Upload test results
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       if: always()
       with:
         name: playwright-report-${{ matrix.browser }}
@@ -86,7 +86,7 @@ jobs:
         retention-days: 30
         
     - name: Upload test videos
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       if: always()
       with:
         name: test-videos-${{ matrix.browser }}
@@ -119,10 +119,11 @@ jobs:
       env:
         LHCI_GITHUB_APP_TOKEN: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}
 
-  # Security Scanning Job
+  # Security Scanning Job (Optional)
   security-scan:
     name: Security Scan
     runs-on: ubuntu-latest
+    if: ${{ secrets.SNYK_TOKEN != '' }}
     
     steps:
     - name: Checkout code
@@ -139,7 +140,7 @@ jobs:
   quality-gates:
     name: Quality Gates
     runs-on: ubuntu-latest
-    needs: [unit-tests, e2e-tests, performance-tests, security-scan]
+    needs: [unit-tests, e2e-tests, performance-tests]
     
     steps:
     - name: Checkout code
@@ -215,12 +216,12 @@ jobs:
         # Add your smoke test commands here
         # Example: npm run test:smoke:staging
 
-  # Notification Job
+  # Notification Job (Optional)
   notify:
     name: Notify Team
     runs-on: ubuntu-latest
     needs: [quality-gates, deploy-staging]
-    if: always()
+    if: always() && ${{ secrets.SLACK_WEBHOOK_URL != '' }}
     
     steps:
     - name: Notify Slack
@@ -230,8 +231,6 @@ jobs:
         status: ${{ job.status }}
         channel: '#testing-notifications'
         webhook_url: ${{ secrets.SLACK_WEBHOOK_URL }}
-      env:
-        SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
 
   # Metrics and Reporting Job
   metrics:
@@ -259,7 +258,7 @@ jobs:
         npm run test:metrics
         
     - name: Upload metrics report
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: test-metrics-report
         path: metrics-report/
