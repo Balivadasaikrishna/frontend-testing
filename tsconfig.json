@@ -1,0 +1,49 @@
+{
+  "compilerOptions": {
+    // Target modern JavaScript
+    "target": "ES2020",
+    
+    // Use ES modules
+    "module": "ESNext",
+    
+    // Allow JS files
+    "allowJs": true,
+    
+    // Skip type checking for JS files
+    "skipLibCheck": true,
+    
+    // Strict type checking
+    "strict": true,
+    
+    // Force consistent casing
+    "forceConsistentCasingInFileNames": true,
+    
+    // No emit (for testing setup)
+    "noEmit": true,
+    
+    // ES module interop
+    "esModuleInterop": true,
+    
+    // Allow synthetic default imports
+    "allowSyntheticDefaultImports": true,
+    
+    // JSX support
+    "jsx": "react-jsx",
+    
+    // Module resolution
+    "moduleResolution": "node",
+    
+    // Resolve JSON modules
+    "resolveJsonModule": true,
+    
+    // Isolated modules
+    "isolatedModules": true
+  },
+  "include": [
+    "src/**/*",
+    "tests/**/*"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
+}
