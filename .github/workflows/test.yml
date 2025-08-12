@@ -57,7 +57,7 @@ jobs:
       run: npm ci
       
     - name: Install Playwright browsers
-      run: npx playwright install --with-deps chromium
+      run: npx playwright install chromium
       
     - name: Run E2E tests
       run: npx playwright test --project=chromium
@@ -85,6 +85,21 @@ jobs:
       
     - name: Build application
       run: npm run build
+      
+    - name: List build output
+      run: ls -la dist/
+      
+    - name: Verify build output
+      run: |
+        if [ ! -f "dist/index.js" ]; then
+          echo "Error: dist/index.js not found"
+          exit 1
+        fi
+        if [ ! -f "dist/index.html" ]; then
+          echo "Error: dist/index.html not found"
+          exit 1
+        fi
+        echo "Build verification successful"
       
     - name: Upload build artifacts
       uses: actions/upload-artifact@v4
