@@ -57,7 +57,16 @@ jobs:
       run: npm ci
       
     - name: Install Playwright browsers
+      run: npx playwright install --with-deps chromium
+      
+    - name: Verify browser installation
       run: npx playwright install chromium
+      
+    - name: Check browser executable
+      run: |
+        echo "Checking browser installation..."
+        ls -la node_modules/playwright-core/.local-browsers/
+        echo "Browser check complete"
       
     - name: Run E2E tests
       run: npx playwright test --project=chromium --reporter=list
