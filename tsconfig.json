@@ -3,8 +3,8 @@
     // Target modern JavaScript
     "target": "ES2020",
     
-    // Use ES modules
-    "module": "ESNext",
+    // Use CommonJS for better compatibility
+    "module": "CommonJS",
     
     // Allow JS files
     "allowJs": true,
@@ -40,11 +40,13 @@
     "outDir": "./dist",
     
     // Remove declaration files for now
-    "declaration": false
+    "declaration": false,
+    
+    // Flatten output structure - files go directly to dist/
+    "rootDir": "./src"
   },
   "include": [
-    "src/**/*",
-    "tests/**/*"
+    "src/**/*"
   ],
   "exclude": [
     "node_modules",
