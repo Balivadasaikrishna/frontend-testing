@@ -18,9 +18,6 @@
     // Force consistent casing
     "forceConsistentCasingInFileNames": true,
     
-    // No emit (for testing setup)
-    "noEmit": true,
-    
     // ES module interop
     "esModuleInterop": true,
     
@@ -37,13 +34,20 @@
     "resolveJsonModule": true,
     
     // Isolated modules
-    "isolatedModules": true
+    "isolatedModules": true,
+    
+    // Output directory for compiled files
+    "outDir": "./dist",
+    
+    // Remove declaration files for now
+    "declaration": false
   },
   "include": [
     "src/**/*",
     "tests/**/*"
   ],
   "exclude": [
-    "node_modules"
+    "node_modules",
+    "dist"
   ]
 }
